@@ -1,20 +1,618 @@
-<html>
-    <head>
-        <title>CS5356 HW3</title>
-        <h1>CS5356 HW3</h1>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Syeda Kazmi-Shah, Software Engineer">
+  <meta name="keywords" content="software engineer, AWS, McKinsey, full-stack, portfolio, retro theme">
+  <title>Syeda Kazmi-Shah | Retro Tech Journey</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            retropink: '#ec4899',
+            retrolavender: '#E6E6FA',
+            retroblack: '#333333'
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Pixel Font for Retro Vibe -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Typed.js for text typing animation -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <!-- Custom CSS -->
+  <style>
+    :root {
+      --retro-pink: #ec4899;
+      --retro-lavender: #E6E6FA;
+      --retro-black: #333333;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+    
+    .font-pixel {
+      font-family: 'Press Start 2P', cursive;
+    }
+    
+    .bg-lavender {
+      background-color: var(--retro-lavender);
+    }
+    
+    .section-title {
+      position: relative;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 0.5rem 0;
+    }
+    
+    .section-title::before, 
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+    
+    .section-title::before {
+      top: 0;
+      background: linear-gradient(90deg, var(--retro-pink), #9c5bff);
+    }
+    
+    .section-title::after {
+      bottom: 0;
+      background: linear-gradient(90deg, #9c5bff, var(--retro-pink));
+    }
+    
+    .timeline-item {
+      opacity: 1;
+      transform: translateX(0);
+      margin-bottom: 2rem;
+    }
+    
+    .dialog-box {
+      position: relative;
+      transition: transform 0.3s ease;
+      box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+      background-color: white;
+      border: 2px solid var(--retro-pink);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .dialog-box:hover {
+      transform: scale(1.05);
+      box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+    }
+    
+    .dialog-box::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left: 10px solid #fff;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+    }
+    
+    .side-dialog {
+      position: relative;
+      animation: float 3s ease-in-out infinite;
+      box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+      background-color: #ffebf5;
+      border: 2px solid var(--retro-pink);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      margin-top: 1rem;
+      margin-left: 2rem;
+      max-width: 80%;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .retro-text {
+      text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    }
+    
+    .animate-glitch {
+      animation: glitch 1s linear infinite;
+    }
+    
+    @keyframes glitch {
+      2%, 64% { transform: translate(2px,0) skew(0deg); }
+      4%, 60% { transform: translate(-2px,0) skew(0deg); }
+      62% { transform: translate(0,0) skew(5deg); }
+    }
+    
+    .pixel-border {
+      border-style: solid;
+      border-width: 4px;
+      border-image: linear-gradient(45deg, var(--retro-pink) 0%, #9c5bff 100%) 1;
+      image-rendering: pixelated;
+    }
+    
+    .typing-cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background-color: var(--retro-pink);
+      animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    
+    .retro-button {
+      background-color: var(--retro-pink);
+      color: white;
+      font-family: 'Press Start 2P', cursive;
+      padding: 10px 20px;
+      border: none;
+      box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+      transition: all 0.2s ease;
+    }
+    
+    .retro-button:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+    }
+    
+    .retro-button:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+    }
+    
+    /* Scanlines effect */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.02) 50%
+      );
+      background-size: 100% 4px;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+    
+    .skill-card {
+      background-color: white;
+      border: 2px solid var(--retro-pink);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    /* Responsive fixes */
+    @media (max-width: 640px) {
+      .timeline-item {
+        margin-bottom: 2rem;
+      }
+      
+      .side-dialog {
+        margin-left: 0;
+        margin-top: 1rem;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="bg-lavender text-gray-800 overflow-x-hidden font-pixel">
+  <!-- Scanlines effect -->
+  <div class="scanlines"></div>
+  
+  <!-- Chibi Avatar (Floating) -->
+  <!-- <div id="chibi-avatar" class="fixed top-4 left-4 w-20 h-20 sm:w-24 sm:h-24 bg-cover bg-center z-50 md:top-10 md:left-10" style="background-image: url('./images/chibi-you.svg')"></div> -->
 
+  <!-- Header -->
+  <header class="text-center py-16 px-4">
+    <h1 class="text-4xl sm:text-5xl text-pink-500 mb-4 animate-glitch" id="main-title">Syeda Kazmi-Shah</h1>
+    <p class="text-xl sm:text-2xl text-gray-700" id="subtitle"></p>
+  </header>
 
-        <div>   
-
-            <h2>Syeda Kazmi Shah</h2>
-            <img src="./images/ai_cat.png" alt="Syeda Kazmi Shah" width="200" height="400">
-
-
+  <!-- Education Section -->
+  <section class="mb-16 px-4">
+    <h2 class="section-title text-3xl text-pink-500" id="education-title">Education Quest</h2>
+    <div class="max-w-3xl mx-auto">
+      <div class="timeline-item flex flex-col sm:flex-row items-start mb-8">
+        <div class="timeline-dot bg-pink-500 w-4 h-4 rounded-full mt-2 mr-0 sm:mr-4 animate-pulse"></div>
+        <div class="flex-1">
+          <div class="dialog-box">
+            <h3 class="text-xl text-pink-500">Cornell Tech (Cornell University)</h3>
+            <p class="mt-2">Master of Engineering in Computer Science</p>
+            <p class="text-sm text-gray-600">GPA: 4.0 | Expected Aug 2026</p>
+          </div>
+          <div class="side-dialog">
+            <p>"Leveling up at Cornell Tech! +10 Intelligence!"</p>
+          </div>
         </div>
-        This site is currently under construction. Please check back soon... 
-    </body>
+      </div>
+      
+      <div class="timeline-item flex flex-col sm:flex-row items-start">
+        <div class="timeline-dot bg-pink-500 w-4 h-4 rounded-full mt-2 mr-0 sm:mr-4 animate-pulse"></div>
+        <div class="flex-1">
+          <div class="dialog-box">
+            <h3 class="text-xl text-pink-500">John Jay College</h3>
+            <p class="mt-2">Bachelor of Science in Computer Science</p>
+            <p class="text-sm text-gray-600">GPA: 3.8 | Dec 2018</p>
+          </div>
+          <div class="side-dialog">
+            <p>"First quest completed! CS knowledge unlocked!"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Experience Timeline -->
+  <section class="min-h-screen py-12 px-4">
+    <h2 class="section-title text-3xl text-pink-500" id="experience-title">Professional Quest Log</h2>
+    <div class="timeline max-w-4xl mx-auto">
+      <!-- McKinsey Current -->
+      <div class="timeline-item flex flex-col sm:flex-row items-start mb-14">
+        <div class="timeline-dot bg-pink-500 w-4 h-4 rounded-full mt-2 mr-0 sm:mr-4 animate-pulse"></div>
+        <div class="timeline-content flex-1 relative">
+          <div class="dialog-box cursor-pointer" data-popup="mckinsey-current">
+            <h3 class="text-xl text-pink-500">Senior Software Engineer</h3>
+            <p class="mt-2">McKinsey & Company</p>
+            <p class="text-sm text-gray-600">06/2024 - Present</p>
+          </div>
+          <div class="side-dialog">
+            <p>"Level Up! Boss mode activated at McKinsey! 🚀"</p>
+          </div>
+        </div>
+      </div>
 
+      <!-- AWS -->
+      <div class="timeline-item flex flex-col sm:flex-row items-start mb-14">
+        <div class="timeline-dot bg-pink-500 w-4 h-4 rounded-full mt-2 mr-0 sm:mr-4 animate-pulse"></div>
+        <div class="timeline-content flex-1 relative">
+          <div class="dialog-box cursor-pointer" data-popup="aws">
+            <h3 class="text-xl text-pink-500">Software Engineer</h3>
+            <p class="mt-2">Amazon Web Services (AWS)</p>
+            <p class="text-sm text-gray-600">11/2022 - 05/2024</p>
+          </div>
+          <div class="side-dialog">
+            <p>"Cloud ninja status achieved! ☁️✨"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- McKinsey Previous -->
+      <div class="timeline-item flex flex-col sm:flex-row items-start mb-14">
+        <div class="timeline-dot bg-pink-500 w-4 h-4 rounded-full mt-2 mr-0 sm:mr-4 animate-pulse"></div>
+        <div class="timeline-content flex-1 relative">
+          <div class="dialog-box cursor-pointer" data-popup="mckinsey-previous">
+            <h3 class="text-xl text-pink-500">Software Engineer</h3>
+            <p class="mt-2">McKinsey & Company</p>
+            <p class="text-sm text-gray-600">01/2020 - 10/2022</p>
+          </div>
+          <div class="side-dialog">
+            <p>"Election platform master! Democracy++; 🗳️"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Previous Roles -->
+      <div class="timeline-item flex flex-col sm:flex-row items-start">
+        <div class="timeline-dot bg-pink-500 w-4 h-4 rounded-full mt-2 mr-0 sm:mr-4 animate-pulse"></div>
+        <div class="timeline-content flex-1 relative">
+          <div class="dialog-box cursor-pointer" data-popup="early-career">
+            <h3 class="text-xl text-pink-500">Early Career Adventures</h3>
+            <p class="mt-2">Fidelity Investments & Morgan Stanley</p>
+            <p class="text-sm text-gray-600">2018 - 2019</p>
+          </div>
+          <div class="side-dialog">
+            <p>"Where it all began! 🌟 Tutorial level complete!"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="py-12 px-4 bg-white">
+    <h2 class="section-title text-3xl text-pink-500" id="skills-title">Tech Skill Tree</h2>
+    <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="skill-card">
+        <h3 class="text-xl text-pink-500 mb-4">Languages</h3>
+        <p class="text-sm">Python, C, C++, Java, CSS, HTML, JavaScript, SQL</p>
+      </div>
+      <div class="skill-card">
+        <h3 class="text-xl text-pink-500 mb-4">CI/CD Tools</h3>
+        <p class="text-sm">GIT, Jenkins, JIRA, Kanban, Kubernetes, Docker, Argo/CD</p>
+      </div>
+      <div class="skill-card">
+        <h3 class="text-xl text-pink-500 mb-4">Frameworks</h3>
+        <p class="text-sm">SpringBoot, React, Redux, Angular, Express, Bootstrap, Jest, JUnit</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Retro Pop-Up Container -->
+  <div id="popup-container" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div id="popup-content" class="bg-white p-6 rounded-lg shadow-lg border-4 border-pink-500 w-11/12 max-w-2xl">
+      <h2 id="popup-title" class="text-2xl text-pink-500 mb-4"></h2>
+      <div id="popup-text" class="text-gray-800 mb-6 typing-animation"></div>
+      <button id="close-popup" class="retro-button">
+        [CLOSE]
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-pink-100 text-center">
+    <p class="text-gray-700">Let's connect and create something amazing!</p>
+    <div class="mt-4 text-2xl cursor-pointer animate-bounce">👾</div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Popup content data
+    const popupData = {
+      'mckinsey-current': {
+        title: 'Senior Software Engineer at McKinsey & Company',
+        content: `• Architected Java-based middleware layer using Spring Boot for 46,000 global users
+                  • Led FirstUp project integration with secure API endpoints and data pipeline
+                  • Reduced security risks by 5% through OWASP vulnerability resolution
+                  • Achieved $200K annual savings by migrating from HEAP to Dynatrace`
+      },
+      'aws': {
+        title: 'Software Engineer at AWS',
+        content: `• Optimized Network Load Balancers for DynamoDB
+                  • Developed solutions using Java, Python, AWS Lambda, and CloudFormation
+                  • Enhanced AWS Kendra's ML-driven data indexing
+                  • Engineered secure VPC-DynamoDB connections`
+      },
+      'mckinsey-previous': {
+        title: 'Software Engineer at McKinsey & Company',
+        content: `• Built mission-critical election platform with Java and Spring Boot
+                  • Developed React/Redux frontend applications
+                  • Optimized Kubernetes cluster resources
+                  • Implemented comprehensive testing with Jest, Enzyme, and Cypress`
+      },
+      'early-career': {
+        title: 'Early Career Positions',
+        content: `Fidelity Investments (2019):
+                  • Led backend development for PBO data analytics
+                  • Built scalable services and RESTful APIs
+
+                  Morgan Stanley (2018):
+                  • Created data-driven chatbot
+                  • Developed UI using Angular 6
+                  • Applied ML concepts with Stanford CoreNLP`
+      }
+    };
+
+    // Animation and interaction logic
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize GSAP ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger);
+      
+      // Make sure all content is visible initially
+      document.querySelectorAll('.timeline-item, .skill-card').forEach(item => {
+        item.style.opacity = 1;
+        item.style.transform = 'translateX(0)';
+      });
+      
+      // Typing animation for subtitle
+      const subtitleOptions = {
+        strings: ['Software Engineer | Tech Explorer'],
+        typeSpeed: 50,
+        backSpeed: 0,
+        loop: false,
+        showCursor: true,
+        cursorChar: '|',
+        onComplete: function() {
+          // Start section title animations after subtitle is complete
+          animateSectionTitles();
+        }
+      };
+      
+      new Typed('#subtitle', subtitleOptions);
+      
+      // Function to animate section titles
+      function animateSectionTitles() {
+        const titles = ['#education-title', '#experience-title', '#skills-title'];
+        
+        titles.forEach((selector, index) => {
+          const element = document.querySelector(selector);
+          if (!element) return;
+          
+          const originalText = element.textContent;
+          element.textContent = originalText; // Ensure text is visible even if animation fails
+          
+          // Add the gradient borders immediately
+          element.classList.add('section-title');
+        });
+      }
+
+      // Simple fade-in animation for timeline items
+      document.querySelectorAll('.timeline-item').forEach((item, index) => {
+        // Set initial state
+        gsap.set(item, { opacity: 1, x: 0 });
+        
+        // Add a subtle animation on scroll
+        gsap.from(item, {
+          opacity: 0.5,
+          y: 20,
+          duration: 0.7,
+          scrollTrigger: {
+            trigger: item,
+            start: "top 90%",
+            toggleActions: "play none none none"
+          },
+          delay: index * 0.1
+        });
+      });
+      
+      // Add hover effects to dialog boxes
+      document.querySelectorAll('.dialog-box').forEach(box => {
+        box.addEventListener('mouseenter', () => {
+          gsap.to(box, {
+            y: -5,
+            duration: 0.3,
+            ease: "power1.out"
+          });
+        });
+        
+        box.addEventListener('mouseleave', () => {
+          gsap.to(box, {
+            y: 0,
+            duration: 0.3,
+            ease: "power1.out"
+          });
+        });
+      });
+
+      // Popup functionality with typing animation
+      const popup = document.getElementById('popup-container');
+      const popupTitle = document.getElementById('popup-title');
+      const popupText = document.getElementById('popup-text');
+      const closePopup = document.getElementById('close-popup');
+      let currentTyped = null;
+      let isPopupOpen = false;
+      let currentPopupItem = null;
+      let isAnimating = false;
+
+      // Function to safely destroy typed instance
+      function destroyTyped() {
+        if (currentTyped) {
+          currentTyped.destroy();
+          currentTyped = null;
+        }
+      }
+
+      // Function to properly close the popup and clean up
+      function closePopupWithCleanup() {
+        if (isAnimating) return;
+        
+        isAnimating = true;
+        gsap.to(popup.querySelector('#popup-content'), {
+          scale: 0.8,
+          <!-- opacity: 0, -->
+          duration: 0.3,
+          onComplete: function() {
+            popup.classList.add('hidden');
+            destroyTyped();
+            popupText.innerHTML = '';
+            isPopupOpen = false;
+            currentPopupItem = null;
+            isAnimating = false;
+          }
+        });
+      }
+
+      // Function to open popup with item data
+      function openPopup(itemId) {
+        const data = popupData[itemId];
+        if (!data) return;
+        
+        // Allow reopening the same item after closing
+        if (isPopupOpen && currentPopupItem === itemId) {
+          closePopupWithCleanup();
+          return;
+        }
+        
+        isAnimating = true;
+        
+        // First destroy any existing typed instance
+        destroyTyped();
+        
+        // Reset popup content
+        popupTitle.textContent = data.title;
+        popupText.innerHTML = '';
+        
+        // Show popup
+        popup.classList.remove('hidden');
+        
+        // Animate and initialize typing
+        gsap.from(popup.querySelector('#popup-content'), {
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.3,
+          onComplete: function() {
+            currentTyped = new Typed(popupText, {
+              strings: [data.content],
+              typeSpeed: 10,
+              showCursor: false
+            });
+            isPopupOpen = true;
+            currentPopupItem = itemId;
+            isAnimating = false;
+          }
+        });
+      }
+
+      document.querySelectorAll('.dialog-box').forEach(box => {
+        box.addEventListener('click', () => {
+          const itemId = box.dataset.popup;
+          openPopup(itemId);
+        });
+      });
+
+      // Use our clean close function for both button and outside clicks
+      closePopup.addEventListener('click', closePopupWithCleanup);
+
+      // Close popup when clicking outside
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+          closePopupWithCleanup();
+        }
+      });
+      
+      // Add retro sound effect on button clicks
+      function playRetroSound() {
+        const audio = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU9vT18A');
+        audio.volume = 0.2;
+        audio.play().catch(e => console.log('Audio play failed:', e));
+      }
+      
+      document.querySelectorAll('button, .dialog-box').forEach(el => {
+        el.addEventListener('click', playRetroSound);
+      });
+      
+      // Fix for mobile responsiveness
+      if (window.innerWidth <= 640) {
+        document.querySelectorAll('.side-dialog').forEach(dialog => {
+          dialog.style.marginLeft = '0';
+        });
+      }
+    });
+  </script>
+</body>
 </html>
