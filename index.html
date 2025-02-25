@@ -44,9 +44,22 @@
     <p class="text-xl sm:text-2xl text-gray-700" id="subtitle"></p>
   </header>
 
-  <!-- Education Section -->
-  <section class="mb-16 px-4">
+  <!-- Education Section with Chibi Avatar -->
+  <section class="mb-16 px-4 relative">
     <h2 class="section-title text-3xl text-pink-500" id="education-title">Education Quest</h2>
+    
+    <!-- Chibi Avatar -->
+    <div class="chibi-container absolute left-4 sm:left-8 md:left-16 lg:left-24 top-16 sm:top-20 z-10" style="width: 250px">
+      <div class="chibi-avatar w-20 h-20 sm:w-24 sm:h-24 bg-cover bg-center" style="background-image: url('./images/chibi-you.png')"></div>
+      <div class="chibi-dialog dialog-box mt-2 p-2 text-xs">
+        <p id="chibi-text"></p>
+        <div class="flex justify-between mt-2">
+          <ul><a href="https://github.com/manzala" target="_blank" class="retro-link">GitHub</a></ul>
+          <ul><a href="https://www.linkedin.com/in/syeda-kazmi-shah/" target="_blank" class="retro-link">LinkedIn</a></ul>
+        </div>
+      </div>
+    </div>
+    
     <div class="max-w-3xl mx-auto">
       <div class="timeline-item flex flex-col sm:flex-row items-start mb-8">
         <div class="timeline-dot bg-pink-500 w-4 h-4 rounded-full mt-2 mr-0 sm:mr-4 animate-pulse"></div>

@@ -56,10 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
     onComplete: function() {
       // Start section title animations after subtitle is complete
       animateSectionTitles();
+      // Start chibi text animation after subtitle is complete
+      animateChibibText();
     }
   };
   
   new Typed('#subtitle', subtitleOptions);
+  
+  // Function to animate chibi text
+  function animateChibibText() {
+    const chibiTextElement = document.getElementById('chibi-text');
+    if (!chibiTextElement) return;
+    
+    const chibiTextOptions = {
+      strings: ['GitHub or LinkedIn?'],
+      typeSpeed: 60,
+      backSpeed: 0,
+      loop: false,
+      showCursor: true,
+      cursorChar: '|',
+      startDelay: 500
+    };
+    
+    new Typed('#chibi-text', chibiTextOptions);
+  }
   
   // Function to animate section titles
   function animateSectionTitles() {
