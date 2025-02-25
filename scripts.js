@@ -62,6 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   
   new Typed('#subtitle', subtitleOptions);
+
+  async function apicall() { // NEED TO USE - CHECKPOINT
+     response = await fetch('https://api.chibi.com/chibi') // get headers
+      data = response.json() // get body
+      return data.data
+  }
   
   // Function to animate chibi text
   function animateChibibText() {
