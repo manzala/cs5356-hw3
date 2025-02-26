@@ -63,19 +63,42 @@ document.addEventListener('DOMContentLoaded', () => {
   
   new Typed('#subtitle', subtitleOptions);
 
-  async function apicall() { // NEED TO USE - CHECKPOINT
-     response = await fetch('https://api.chibi.com/chibi') // get headers
-      data = response.json() // get body
-      return data.data
+  async function apiCall() {
+    try {
+        const response = await fetch('https://hellosalut.stefanbohacek.dev/?mode=auto'); //Fetch headers
+        const data = await response.json(); //Fetch body
+        
+        // Log the entire response to understand its structure
+        console.log('API Response:', data);
+
+        // Access the 'hello' property directly
+        if (data && data.hello) {
+            return data.hello + ',';
+        } else {
+            console.warn('Greeting not found in response, using default.');
+            return 'Hello' + ','; // Fallback greeting
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return 'Hello' + ','; // Fallback greeting
+    }
   }
   
   // Function to animate chibi text
-  function animateChibibText() {
+  async function animateChibibText() {
     const chibiTextElement = document.getElementById('chibi-text');
     if (!chibiTextElement) return;
-    
+
+    let greeting;
+    try {
+        greeting = await apiCall();
+    } catch (error) {
+        console.error('Error fetching greeting:', error);
+        greeting = 'Hello'; // Fallback greeting
+    }
+
     const chibiTextOptions = {
-      strings: ['GitHub or LinkedIn?'],
+      strings: [greeting + ' GitHub or LinkedIn?'],
       typeSpeed: 60,
       backSpeed: 0,
       loop: false,
@@ -83,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cursorChar: '|',
       startDelay: 500
     };
-    
+
     new Typed('#chibi-text', chibiTextOptions);
   }
   
