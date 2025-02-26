@@ -1,3 +1,11 @@
+<head>
+  <meta property="og:title" content="Syedas's Personal Retro Website" />
+  <meta property="og:description" content="Syedas's Personal Retro Website" />
+  <meta property="og:image" content="./images/chibi-you.png" />
+  <meta property="og:url" content="https://manzala.github.io/cs5356-personal-site/" />
+  <meta property="og:type" content="website" />
+</head>
+
 // Popup content data
 const popupData = {
   'mckinsey-current': {
@@ -93,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         greeting = await apiCall();
     } catch (error) {
-        console.error('Error fetching greeting:', error);
+        console.error('Error fetching greeting:');
         greeting = 'Hello'; // Fallback greeting
     }
 
