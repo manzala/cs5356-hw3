@@ -1,5 +1,13 @@
 // Popup content data
 const popupData = {
+  'cornell-tech': {
+    title: 'Cornell Tech Courses',
+    content: `CS 5356: Building Startup Systems, CS 5785: Applied Machine Learning, CS 5787: Machine Learning Engineering, CS 5789: Machine Learning Hardware`
+  },
+  'john-jay': {
+    title: 'John Jay College Courses',
+    content: `CSCI 271: Introduction to Computer Science, CSCI 373: Advanced Data Structures, CSCI 377: Computer Algorithms, CSCI 379: Computer Networking, CSCI 411: Computer Security and Forensics, MATH 371: Numerical Analysis`
+  },
   'mckinsey-current': {
     title: 'Senior Software Engineer at McKinsey & Company',
     content: `• Architected Java-based middleware layer using Spring Boot for 46,000 global users
